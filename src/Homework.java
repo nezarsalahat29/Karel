@@ -26,8 +26,21 @@ public class Homework extends SuperKarel {
             zigzagTL(c-1);
 
         }
+        else if(c%2==0 && r%2==0 ){
+            //doubleSplit(c,r);
+            moveHalf(c);
+            Split(r);
+            move();
+            //moveHalf(c);
+            Split(c);
+            //moveHalf(r);
+        }
 
         //turnLeft();
+    }
+
+    private void doubleSplit(int c, int r) {
+
     }
 
     /*

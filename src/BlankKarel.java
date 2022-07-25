@@ -27,6 +27,53 @@ public class BlankKarel extends SuperKarel {
 				move();
 			turnRight();
 			zigzagTL(c-1);
+			turnAround();
+			while (frontIsClear())
+				move();
+			turnAround();
+
+		}  else if(c%2==0 && r%2==0 && !(c==2 || r==2)){
+			//doubleSplit(c,r);
+			/*
+			*
+			*
+			moveHalf(c);
+			Split(r);
+			moveHalf(c);
+			moveHalf(r);
+			Split(c);
+			moveHalf(r);
+			* */
+			moveHalf(c-1);
+			Split(r);
+			turnAround();
+			move();
+			turnRight();
+			Split(r);
+			moveHalf(c-1);
+			//turnAround();
+			moveHalf(r-1);
+			Split(c);
+			turnAround();
+			move();
+			turnRight();
+			Split(c);
+			moveHalf(r-1);
+		}
+		else if (c==2 || r ==2 && (r!=0 || c!=0)){
+			if(c==2) {
+				while(r-->r/2){
+					if (frontIsClear())
+						zigzagTR(1);
+					//turnLeft();
+					//while(frontIsClear())
+						//move();
+					turnAround();
+					if (frontIsClear())
+						zigzagTL(1);
+						turnAround();
+				}
+			}
 
 		}
 
