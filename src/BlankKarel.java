@@ -60,22 +60,28 @@ public class BlankKarel extends SuperKarel {
 			Split(c);
 			moveHalf(r-1);
 		}
-		else if (c==2 || r ==2 && (r!=0 || c!=0)){
+		else if (c==2 || r ==2){
 			if(c==2) {
-				while(r-->r/2){
-					if (frontIsClear())
+				while(r>0){
+					if (frontIsClear()) {
 						zigzagTR(1);
-					//turnLeft();
-					//while(frontIsClear())
-						//move();
+						if(--r==0) break;
+					}
 					turnAround();
-					if (frontIsClear())
+					if (frontIsClear()){
 						zigzagTL(1);
-						turnAround();
+						if(--r==0) break;
+					}
+
+					turnAround();
+
 				}
+				pickBeeper();
 			}
 
 		}
+
+
 
 		//turnLeft();
 	}
@@ -86,9 +92,11 @@ public class BlankKarel extends SuperKarel {
 		while(c-->0){
 			if(!beepersPresent())
 				putBeeper();
-			move();
+			if (frontIsClear())
+				move();
 			turnRight();
-			move();
+			if (frontIsClear())
+				move();
 			turnLeft();
 		}
 		if(!beepersPresent())
@@ -100,9 +108,11 @@ public class BlankKarel extends SuperKarel {
 			putBeeper();
 		while(c-->0){
 
-			move();
+			if (frontIsClear())
+				move();
 			turnLeft();
-			move();
+			if (frontIsClear())
+				move();
 			turnRight();
 			if(!beepersPresent())
 				putBeeper();
