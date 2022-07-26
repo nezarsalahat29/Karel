@@ -77,6 +77,28 @@ public class BlankKarel extends SuperKarel {
 
 				}
 				pickBeeper();
+			}else {
+				while(c-->0) {
+
+					zigzagTR(1);
+					turnRight();
+					while (frontIsClear())
+						move();
+					//	}\
+					if (--c == 0) break;
+
+					turnLeft();
+					if (frontIsClear())
+						move();
+
+
+				}
+
+				turnAround();
+				if (frontIsClear())
+					move();
+				if (beepersPresent() && c%2==1)
+					pickBeeper();
 			}
 
 		}
@@ -85,6 +107,7 @@ public class BlankKarel extends SuperKarel {
 
 		//turnLeft();
 	}
+
 
 	private void zigzagTL(int c) {
 		if(!beepersPresent())
@@ -149,4 +172,5 @@ public class BlankKarel extends SuperKarel {
 		return c;
 	}
 }
+
 
