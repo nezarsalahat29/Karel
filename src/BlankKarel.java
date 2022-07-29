@@ -13,7 +13,7 @@ public class BlankKarel extends SuperKarel {
 		turnLeft();
 		r=countRoad();
 		turnLeft();
-		if(c%2==1 && r%2==1 && c!=1){
+		if(c%2==1 && r%2==1 && c!=1 && r!=1){
 			moveHalf(c);
 			Split(r);
 			moveHalf(c);
@@ -61,27 +61,7 @@ public class BlankKarel extends SuperKarel {
 			moveHalf(r-1);
 		}
 		else{
-			if(c==1 || c==2)
-				punnyVSplit(r,c);
-			/*
-			int mod=r%4;
-			int x=4;
-			int q=0;
-			move();
-			turnLeft();
-			if (mod==3) q=1;
-			int count=r/4+q;
-			count--;
-			while(x-->0){
-				while (count-->0){ if (frontIsClear())move();}
-				if (mod!=3 || x != 0)
-					putBeeper();
-				count=r/4+q;
-			}
-			while (frontIsClear()){
-				move();
-				putBeeper();
-			}*/
+			punnySplit(r,c);
 
 		}
 
@@ -90,39 +70,52 @@ public class BlankKarel extends SuperKarel {
 		//turnLeft();
 	}
 
-	private void punnyVSplit(int r, int c) {
-		if (c==1)
-			vSplit(r);
+
+	private void punnySplit(int r, int c){
+		if (r==1)
+			PSplit(c,false);
+		else if(r==2) {
+			PSplit(c,false);
+			turnAround();
+			while (frontIsClear()) move();
+			turnRight();
+			move();
+			turnRight();
+			PSplit(c,false);
+
+		}
+		else if (c==1)
+			PSplit(r,true);
 		else {
-			vSplit(r);
+			PSplit(r,true);
 			turnAround();
 			while (frontIsClear()) move();
 			turnLeft();
 			move();
-			vSplit(r);
+			PSplit(r,true);
 
 		}
-
-
 	}
 
-	private void vSplit(int r) {
-		int mod=r%4;
+	private void PSplit(int w , boolean ch){
+		int mod=w%4;
 		int x=4;
 		int q=0;
 		if (mod==3) q=1;
-		int count=r/4+q-1;
-		turnLeft();
+		int count=w/4+q-1;
+		// Vsplit
+		if (ch==true)turnLeft();
 		while(x-->0){
 			while (count-->0){ if (frontIsClear())move();}
 			if (mod!=3 || x != 0)
 				putBeeper();
-			count=r/4+q;
+			count=w/4+q;
 		}
 		while (frontIsClear()){
 			move();
 			putBeeper();
 		}
+
 	}
 
 
