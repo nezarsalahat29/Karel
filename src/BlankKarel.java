@@ -71,29 +71,39 @@ public class BlankKarel extends SuperKarel {
 	}
 
 
-	private void punnySplit(int r, int c){
-		if (r==1)
-			PSplit(c,false);
-		else if(r==2) {
-			PSplit(c,false);
+	private void punnySplit(int r, int c) {
+		if (r == 1 && c != 1 && c != 2)
+			PSplit(c, false);
+		else if (r == 2 && c != 1 && c != 2) {
+			PSplit(c, false);
 			turnAround();
 			while (frontIsClear()) move();
 			turnRight();
 			move();
 			turnRight();
-			PSplit(c,false);
+			PSplit(c, false);
 
-		}
-		else if (c==1)
-			PSplit(r,true);
-		else {
-			PSplit(r,true);
+		} else if (c == 1 && r != 1 && r != 2)
+			PSplit(r, true);
+		else if (c == 2 && r != 1 && r != 2) {
+			PSplit(r, true);
 			turnAround();
 			while (frontIsClear()) move();
 			turnLeft();
 			move();
-			PSplit(r,true);
-
+			PSplit(r, true);
+		} else {
+			if (c == 2 && r == 2) {
+				putBeeper();
+				move();
+				turnLeft();
+				move();
+				putBeeper();
+			} else if (c!=r) {
+				putBeeper();
+				if (r==2){ turnLeft();move();}
+				else {move();}
+			}
 		}
 	}
 
