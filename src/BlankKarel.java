@@ -13,64 +13,61 @@ public class BlankKarel extends SuperKarel {
 		turnLeft();
 		r=countRoad();
 		turnLeft();
-		if(c%2==1 && r%2==1 && c!=1 && r!=1){
-			moveHalf(c);
-			Split(r);
-			moveHalf(c);
-			moveHalf(r);
-			Split(c);
-			moveHalf(r);
-		} else if (c==r && c!=1 && c!=2) {
-			zigzagTR(c-1);
-			turnRight();
-			while(frontIsClear())
-				move();
-			turnRight();
-			zigzagTL(c-1);
-			turnAround();
-			while (frontIsClear())
-				move();
-			turnAround();
+		if (c!=1 && c!=2 && r!=1 && r!=2) {
+			//odd column
+			//even row
+			if (c % 2 == 1) {
+				moveHalf(c);
+				Split(r);
+				moveHalf(c);
+				//odd row
+			}
+			//even column
+			else {
+				doubleSplit(c,r);
 
-		}  else if(c%2==0 && r%2==0 && !(c==2 || r==2)){
-			//doubleSplit(c,r);
-			/*
-			*
-			*
-			moveHalf(c);
-			Split(r);
-			moveHalf(c);
-			moveHalf(r);
-			Split(c);
-			moveHalf(r);
-			* */
-			moveHalf(c-1);
-			Split(r);
-			turnAround();
-			move();
-			turnRight();
-			Split(r);
-			moveHalf(c-1);
-			//turnAround();
-			moveHalf(r-1);
-			Split(c);
-			turnAround();
-			move();
-			turnRight();
-			Split(c);
-			moveHalf(r-1);
+			}
+			if (r % 2 == 1) {
+				moveHalf(r);
+				Split(c);
+				moveHalf(r);
+			}
+			//even row
+			else {
+				doubleSplit(r,c);
+			}
+
+			if (facingWest()){
+				while (frontIsClear())move();
+				turnLeft();
+				while (frontIsClear())move();
+			}
 		}
 		else{
 			punnySplit(r,c);
-
 		}
-
-
-
-		//turnLeft();
 	}
 
+	private void doubleSplit(int first, int second) {
+		moveHalf(first-1);
+		Split(second);
+		turnAround();
+		move();
+		turnRight();
+		Split(second);
+		moveHalf(first-1);
+	}
 
+	private void Split(int x) {
+		while(x-->0 && frontIsClear()){
+			if(!beepersPresent())
+				putBeeper();
+			move();
+		}
+		if(!beepersPresent())
+			putBeeper();
+		turnLeft();
+	}
 	private void punnySplit(int r, int c) {
 		if (r == 1 && c != 1 && c != 2)
 			PSplit(c, false);
@@ -113,8 +110,8 @@ public class BlankKarel extends SuperKarel {
 		int q=0;
 		if (mod==3) q=1;
 		int count=w/4+q-1;
-		// Vsplit
-		if (ch==true)turnLeft();
+		// Vertical split
+		if (ch)turnLeft();
 		while(x-->0){
 			while (count-->0){ if (frontIsClear())move();}
 			if (mod!=3 || x != 0)
@@ -126,53 +123,6 @@ public class BlankKarel extends SuperKarel {
 			putBeeper();
 		}
 
-	}
-
-
-	private void zigzagTL(int c) {
-		if(!beepersPresent())
-			putBeeper();
-		while(c-->0){
-			if(!beepersPresent())
-				putBeeper();
-			if (frontIsClear())
-				move();
-			turnRight();
-			if (frontIsClear())
-				move();
-			turnLeft();
-		}
-		if(!beepersPresent())
-			putBeeper();
-	}
-
-	private void zigzagTR(int c) {
-		if(!beepersPresent())
-			putBeeper();
-		while(c-->0){
-
-			if (frontIsClear())
-				move();
-			turnLeft();
-			if (frontIsClear())
-				move();
-			turnRight();
-			if(!beepersPresent())
-				putBeeper();
-		}
-
-	}
-
-
-	private void Split(int x) {
-		while(x-->0 && frontIsClear()){
-			if(!beepersPresent())
-				putBeeper();
-			move();
-		}
-		if(!beepersPresent())
-			putBeeper();
-		turnLeft();
 	}
 
 	private void moveHalf(int y) {
