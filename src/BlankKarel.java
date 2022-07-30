@@ -104,25 +104,37 @@ public class BlankKarel extends SuperKarel {
 		}
 	}
 
-	private void PSplit(int w , boolean ch){
-		int mod=w%4;
-		int x=4;
-		int q=0;
-		if (mod==3) q=1;
-		int count=w/4+q-1;
+	private void PSplit(int w , boolean ch) {
+		int mod = w % 4;
+		int x = 4;
+		int q = 0;
+		if (mod == 3) q = 1;
+		int count = w / 4 + q - 1;
 		// Vertical split
-		if (ch)turnLeft();
-		while(x-->0){
-			while (count-->0){ if (frontIsClear())move();}
-			if (mod!=3 || x != 0)
+		if (ch) turnLeft();
+		if (w < 7) {
+			int c = 0;
+			while (frontIsClear()) {
+				move();
+				if (c % 2 == 0)
+					putBeeper();
+				c++;
+			}
+		} else {
+			while (x-- > 0) {
+				while (count-- > 0) {
+					if (frontIsClear()) move();
+				}
+				if (mod != 3 || x != 0)
+					putBeeper();
+				count = w / 4 + q;
+			}
+			while (frontIsClear()) {
+				move();
 				putBeeper();
-			count=w/4+q;
-		}
-		while (frontIsClear()){
-			move();
-			putBeeper();
-		}
+			}
 
+		}
 	}
 
 	private void moveHalf(int y) {
