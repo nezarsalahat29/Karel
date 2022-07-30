@@ -10,7 +10,6 @@ public class Homework extends SuperKarel {
         turnLeft();
         if (c!=1 && c!=2 && r!=1 && r!=2) {
             //odd column
-            //even row
             if (c % 2 == 1) {
                 moveHalf(c);
                 Split(r);
@@ -22,6 +21,7 @@ public class Homework extends SuperKarel {
                 doubleSplit(c,r);
 
             }
+            //odd row
             if (r % 2 == 1) {
                 moveHalf(r);
                 Split(c);
