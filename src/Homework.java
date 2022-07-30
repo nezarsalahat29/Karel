@@ -3,6 +3,7 @@ public class Homework extends SuperKarel {
     public  int mc=0;
     public void run() {
         int r,c;
+        setBeepersInBag(10000);
         c=countRoad();
         turnLeft();
         r=countRoad();
@@ -37,11 +38,15 @@ public class Homework extends SuperKarel {
                 while (frontIsClear()){move();mc++;}
             }
         }
-        else{
-            punnySplit(r,c);
+        else {
+            punnySplit(r, c);
         }
-       // System.out.println(mc);
+        System.out.println(mc);
     }
+
+
+
+
     private void doubleSplit(int first, int second) {
         moveHalf(first-1);
         Split(second);
