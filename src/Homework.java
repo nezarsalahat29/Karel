@@ -42,6 +42,7 @@ public class Homework extends SuperKarel {
             punnySplit(r, c);
         }
         System.out.println(mc);
+        mc=0;
     }
 
 
