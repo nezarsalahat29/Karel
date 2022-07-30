@@ -1,5 +1,6 @@
 import stanford.karel.*;
 public class Homework extends SuperKarel {
+    public  int mc=0;
     public void run() {
         int r,c;
         c=countRoad();
@@ -31,31 +32,32 @@ public class Homework extends SuperKarel {
             }
 
             if (facingWest()){
-                while (frontIsClear())move();
+                while (frontIsClear()){move();mc++;}
                 turnLeft();
-                while (frontIsClear())move();
+                while (frontIsClear()){move();mc++;}
             }
         }
         else{
             punnySplit(r,c);
         }
+       // System.out.println(mc);
     }
-
     private void doubleSplit(int first, int second) {
         moveHalf(first-1);
         Split(second);
         turnAround();
         move();
+        mc++;
         turnRight();
         Split(second);
         moveHalf(first-1);
     }
-
     private void Split(int x) {
         while(x-->0 && frontIsClear()){
             if(!beepersPresent())
                 putBeeper();
             move();
+            mc++;
         }
         if(!beepersPresent())
             putBeeper();
@@ -67,9 +69,10 @@ public class Homework extends SuperKarel {
         else if (r == 2 && c != 1 && c != 2) {
             PSplit(c, false);
             turnAround();
-            while (frontIsClear()) move();
+            while (frontIsClear()){ move();mc++;}
             turnRight();
             move();
+            mc++;
             turnRight();
             PSplit(c, false);
 
@@ -78,25 +81,27 @@ public class Homework extends SuperKarel {
         else if (c == 2 && r != 1 && r != 2) {
             PSplit(r, true);
             turnAround();
-            while (frontIsClear()) move();
+            while (frontIsClear()) {move();mc++;}
             turnLeft();
             move();
+            mc++;
             PSplit(r, true);
         } else {
             if (c == 2 && r == 2) {
                 putBeeper();
                 move();
+                mc++;
                 turnLeft();
                 move();
+                mc++;
                 putBeeper();
             } else if (c!=r) {
                 putBeeper();
-                if (r==2){ turnLeft();move();}
-                else {move();}
+                if (r==2){ turnLeft();move();mc++;}
+                else {move();mc++;}
             }
         }
     }
-
     private void PSplit(int w , boolean ch) {
         int mod = w % 4;
         int x = 4;
@@ -109,6 +114,7 @@ public class Homework extends SuperKarel {
             int c = 0;
             while (frontIsClear()) {
                 move();
+                mc++;
                 if (c % 2 == 0)
                     putBeeper();
                 c++;
@@ -116,7 +122,7 @@ public class Homework extends SuperKarel {
         } else {
             while (x-- > 0) {
                 while (count-- > 0) {
-                    if (frontIsClear()) move();
+                    if (frontIsClear()){ move();mc++;}
                 }
                 if (mod != 3 || x != 0)
                     putBeeper();
@@ -124,6 +130,7 @@ public class Homework extends SuperKarel {
             }
             while (frontIsClear()) {
                 move();
+                mc++;
                 putBeeper();
             }
 
@@ -133,14 +140,15 @@ public class Homework extends SuperKarel {
         int x=y/2;
         while (x-->0){
             move();
+            mc++;
         }
         turnLeft();
     }
-
     private int countRoad(){
         int c=1;
         while (frontIsClear()) {
             move();
+            mc++;
             c++;
         }
         return c;
